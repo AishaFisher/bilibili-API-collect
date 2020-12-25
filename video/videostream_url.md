@@ -2,6 +2,12 @@
 
 <img src="/imgs/download.svg" width="100" height="100"/>
 
+- [关于视频流获取方式](#关于视频流获取方式)
+- [获取视频流URL（web端）](#获取视频流URL（web端）)
+- [视频的获取](#视频的获取)
+
+---
+
 分辨率代码：
 
 | 值   | 含义                               |
@@ -85,8 +91,8 @@ dash方式（fnval=16）：
 
 | 参数名 | 类型 | 内容             | 必要性       | 备注                                                         |
 | ------ | ---- | ---------------- | ------------ | ------------------------------------------------------------ |
-| avid   | num  | 视频avID         | 必要（可选） | avID与bvID任选一个                                           |
-| bvid   | str  | 视频bvID         | 必要（可选） | avID与bvID任选一个                                           |
+| avid   | num  | 稿件avID         | 必要（可选） | avID与bvID任选一个                                           |
+| bvid   | str  | 稿件bvID         | 必要（可选） | avID与bvID任选一个                                           |
 | cid    | num  | 视频CID          | 必要         |                                                              |
 | qn     | num  | 视频清晰度选择   | 非必要       | 未登录默认32（480P）<br />登录默认64（720P）<br />**值含义见上表**<br />注：dash方式无效 |
 | fnval  | num  | 视频获取方式选择 | 非必要       | 默认为0<br />0 2：flv方式（可能会有分段）<br />1：低清mp4方式（仅240P与360P，且限速65K/s）<br />16：dash方式（音视频分流，支持H.265） |
@@ -180,26 +186,26 @@ dash方式（fnval=16）：
 avID方式：
 
 ```shell
-curl -G 'http://api.bilibili.com/x/player/playurl'\
---data-urlencode 'avid=99999999'\
---data-urlencode 'cid=171776208'\
---data-urlencode 'qn=112'\
---data-urlencode 'fnval=0'\
---data-urlencode 'fnver=0'\
---data-urlencode 'fourk=1'\
+curl -G 'http://api.bilibili.com/x/player/playurl' \
+--data-urlencode 'avid=99999999' \
+--data-urlencode 'cid=171776208' \
+--data-urlencode 'qn=112' \
+--data-urlencode 'fnval=0' \
+--data-urlencode 'fnver=0' \
+--data-urlencode 'fourk=1' \
 -b 'SESSDATA=xxx'
 ```
 
  bvID方式：
 
 ```shell
-curl -G 'http://api.bilibili.com/x/player/playurl'\
---data-urlencode 'bvid=BV1y7411Q7Eq'\
---data-urlencode 'cid=171776208'\
---data-urlencode 'qn=112'\
---data-urlencode 'fnval=0'\
---data-urlencode 'fnver=0'\
---data-urlencode 'fourk=1'\
+curl -G 'http://api.bilibili.com/x/player/playurl' \
+--data-urlencode 'bvid=BV1y7411Q7Eq' \
+--data-urlencode 'cid=171776208' \
+--data-urlencode 'qn=112' \
+--data-urlencode 'fnval=0' \
+--data-urlencode 'fnver=0' \
+--data-urlencode 'fourk=1' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -418,26 +424,26 @@ curl -G 'http://api.bilibili.com/x/player/playurl'\
 avID方式：
 
 ```shell
-curl -G 'http://api.bilibili.com/x/player/playurl'\
---data-urlencode 'avid=99999999'\
---data-urlencode 'cid=171776208'\
---data-urlencode 'qn=0'\
---data-urlencode 'fnval=16'\
---data-urlencode 'fnver=0'\
---data-urlencode 'fourk=1'\
+curl -G 'http://api.bilibili.com/x/player/playurl' \
+--data-urlencode 'avid=99999999' \
+--data-urlencode 'cid=171776208' \
+--data-urlencode 'qn=0' \
+--data-urlencode 'fnval=16' \
+--data-urlencode 'fnver=0' \
+--data-urlencode 'fourk=1' \
 -b 'SESSDATA=xxx'
 ```
 
  bvID方式：
 
 ```shell
-curl -G 'http://api.bilibili.com/x/player/playurl'\
---data-urlencode 'bvid=BV1y7411Q7Eq'\
---data-urlencode 'cid=171776208'\
---data-urlencode 'qn=0'\
---data-urlencode 'fnval=16'\
---data-urlencode 'fnver=0'\
---data-urlencode 'fourk=1'\
+curl -G 'http://api.bilibili.com/x/player/playurl' \
+--data-urlencode 'bvid=BV1y7411Q7Eq' \
+--data-urlencode 'cid=171776208' \
+--data-urlencode 'qn=0' \
+--data-urlencode 'fnval=16' \
+--data-urlencode 'fnver=0' \
+--data-urlencode 'fourk=1' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -863,8 +869,8 @@ curl -G 'http://api.bilibili.com/x/player/playurl'\
 **以上述视频url为例：**
 
 ```shell
-wget 'http://upos-sz-mirrorhw.bilivideo.com/upgcxcode/08/62/171776208/171776208-1-112.flv?e=ig8euxZM2rNcNbhMnwhVhwdlhzK3hzdVhoNvNC8BqJIzNbfqXBvEqxTEto8BTrNvN0GvT90W5JZMkX_YN0MvXg8gNEV4NC8xNEV4N03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B5tZlqNCNEto8BTrNvNC7MTX502C8f2jmMQJ6mqF2fka1mqx6gqj0eN0B599M=&uipk=5&nbs=1&deadline=1589565412&gen=playurl&os=hwbv&oi=606631998&trid=e0fa5f9a7610440a871279a28fae85aau&platform=pc&upsig=5f469cb4c190ed54b89bd40cc37eddff&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&mid=293793435&logo=80000000'\
--e 'https://www.bilibili.com'\
+wget 'http://upos-sz-mirrorhw.bilivideo.com/upgcxcode/08/62/171776208/171776208-1-112.flv?e=ig8euxZM2rNcNbhMnwhVhwdlhzK3hzdVhoNvNC8BqJIzNbfqXBvEqxTEto8BTrNvN0GvT90W5JZMkX_YN0MvXg8gNEV4NC8xNEV4N03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B5tZlqNCNEto8BTrNvNC7MTX502C8f2jmMQJ6mqF2fka1mqx6gqj0eN0B599M=&uipk=5&nbs=1&deadline=1589565412&gen=playurl&os=hwbv&oi=606631998&trid=e0fa5f9a7610440a871279a28fae85aau&platform=pc&upsig=5f469cb4c190ed54b89bd40cc37eddff&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&mid=293793435&logo=80000000' \
+-e 'https://www.bilibili.com' \
 -O 'Download_video.flv'
 ```
 

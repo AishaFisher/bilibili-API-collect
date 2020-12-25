@@ -33,7 +33,7 @@
 
 | 字段         | 类型 | 内容           | 备注 |
 | ------------ | ---- | -------------- | ---- |
-| image_height | str  | 已上传图片url  |      |
+| image_url | str  | 已上传图片url  |      |
 | image_width  | num  | 已上传图片宽度 | 像素 |
 | image_height | num  | 已上传图片高度 | 像素 |
 
@@ -42,8 +42,8 @@
 上传了一张图片`test.png`类型为`日常`
 
 ```shell
-curl 'http://api.vc.bilibili.com/api/v1/drawImage/upload'\
--F 'file_up=@test.png'\
+curl 'http://api.vc.bilibili.com/api/v1/drawImage/upload' \
+-F 'file_up=@test.png' \
 -F 'category=daily'
 -b 'SESSDATA=xxx'
 ```

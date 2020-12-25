@@ -1,6 +1,9 @@
 # 表情操作
 
-**本页所有操作均需登录（Cookie）**
+- [添加表情包](#添加表情包)
+- [移除表情包](#移除表情包)
+
+---
 
 ## 添加表情包
 
@@ -35,10 +38,10 @@
 添加ID为`25`的表情包，使用场景为评论区
 
 ```shell
-curl 'http://api.bilibili.com/x/emote/package/add'\
---data-urlencode 'package_id=25'\
---data-urlencode 'business=reply'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/emote/package/add' \
+--data-urlencode 'package_id=25' \
+--data-urlencode 'business=reply' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -86,10 +89,10 @@ curl 'http://api.bilibili.com/x/emote/package/add'\
 移除ID为`25`的表情包，使用场景为评论区
 
 ```shell
-curl 'http://api.bilibili.com/x/emote/package/remove'\
---data-urlencode 'package_id=25'\
---data-urlencode 'business=reply'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/emote/package/remove' \
+--data-urlencode 'package_id=25' \
+--data-urlencode 'business=reply' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 

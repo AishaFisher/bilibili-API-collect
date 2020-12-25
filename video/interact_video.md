@@ -2,6 +2,12 @@
 
 注：互动视频分P与普通视频分P不互通
 
+---
+
+- [获取互动视频模块详细信息](#获取互动视频模块详细信息)
+
+---
+
 ## 获取互动视频模块详细信息
 
 > http://api.bilibili.com/x/stein/edgeinfo_v2
@@ -14,8 +20,8 @@
 
 | 参数名        | 类型 | 内容     | 必要性       | 备注               |
 | ------------- | ---- | -------- | ------------ | ------------------ |
-| aid           | num  | 视频avID | 必要（可选） | avID与bvID任选一个 |
-| bvid          | str  | 视频bvID | 必要（可选） | avID与bvID任选一个 |
+| aid           | num  | 稿件avID | 必要（可选） | avID与bvID任选一个 |
+| bvid          | str  | 稿件bvID | 必要（可选） | avID与bvID任选一个 |
 | graph_version | num  | 剧情图ID | 必要         | 位于`player.so`中  |
 | edge_id       | num  | 模块编号 | 非必要       | 0或留空为起始模块  |
 
@@ -160,7 +166,7 @@
 
 | 字段 | 类型 | 内容     | 备注 |
 | ---- | ---- | -------- | ---- |
-| aid  | num  | 视频avID |      |
+| aid  | num  | 稿件avID |      |
 | cid  | num  | 分P CID  |      |
 
 `data`中的`hidden_vars`数组：
@@ -190,20 +196,20 @@
 avID方式：
 
 ```shell
-curl -G 'http://api.bilibili.com/x/stein/edgeinfo_v2'\
---data-urlencode 'aid=73267982'\
---data-urlencode 'graph_version=155446'\
---data-urlencode 'edge_id=5556092'\
+curl -G 'http://api.bilibili.com/x/stein/edgeinfo_v2' \
+--data-urlencode 'aid=73267982' \
+--data-urlencode 'graph_version=155446' \
+--data-urlencode 'edge_id=5556092' \
 -b 'SESSDATA=xxx'
 ```
 
 bvID方式：
 
 ```shell
-curl -G 'http://api.bilibili.com/x/stein/edgeinfo_v2'\
---data-urlencode 'bvid=BV1UE411y7Wy'\
---data-urlencode 'graph_version=155446'\
---data-urlencode 'edge_id=5556092'\
+curl -G 'http://api.bilibili.com/x/stein/edgeinfo_v2' \
+--data-urlencode 'bvid=BV1UE411y7Wy' \
+--data-urlencode 'graph_version=155446' \
+--data-urlencode 'edge_id=5556092' \
 -b 'SESSDATA=xxx'
 ```
 

@@ -1,5 +1,11 @@
 # 视频TAG
 
+- [获取视频TAG信息](#获取视频TAG信息)
+- [点赞&取消点赞视频TAG](#点赞&取消点赞视频TAG)
+- [点踩&取消点踩视频TAG](#点踩&取消点踩视频TAG)
+
+---
+
 ## 获取视频TAG信息
 
 > http://api.bilibili.com/x/tag/archive/tags
@@ -12,8 +18,8 @@
 
 | 参数名 | 类型 | 内容     | 必要性       | 备注               |
 | ------ | ---- | -------- | ------------ | ------------------ |
-| aid    | num  | 视频avID | 必要（可选） | avID与bvID任选一个 |
-| bvid   | str  | 视频bvID | 必要（可选） | avID与bvID任选一个 |
+| aid    | num  | 稿件avID | 必要（可选） | avID与bvID任选一个 |
+| bvid   | str  | 稿件bvID | 必要（可选） | avID与bvID任选一个 |
 
 **json回复：**
 
@@ -70,16 +76,16 @@
 avID方式：
 
 ```shell
-curl -G 'http://api.bilibili.com/x/tag/archive/tags'\
---data-urlencode 'aid=89772773'\
+curl -G 'http://api.bilibili.com/x/tag/archive/tags' \
+--data-urlencode 'aid=89772773' \
 -b 'SESSDATA=xxx'
 ```
 
 bvID方式：
 
 ```shell
-curl -G 'http://api.bilibili.com/x/tag/archive/tags'\
---data-urlencode 'bvid=BV1M741177Kg'\
+curl -G 'http://api.bilibili.com/x/tag/archive/tags' \
+--data-urlencode 'bvid=BV1M741177Kg' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -216,7 +222,7 @@ curl -G 'http://api.bilibili.com/x/tag/archive/tags'\
 
 | 参数名 | 类型 | 内容                     | 必要性 | 备注 |
 | ------ | ---- | ------------------------ | ------ | ---- |
-| aid    | num  | 视频avID                 | 必要   |      |
+| aid    | num  | 稿件avID                 | 必要   |      |
 | tag_id | num  | TAGID                    | 必要   |      |
 | csrf   | str  | CSRF Token（位于cookie） | 必要   |      |
 
@@ -235,10 +241,10 @@ curl -G 'http://api.bilibili.com/x/tag/archive/tags'\
 为视频`av89772773`的TAG`12620189`点赞
 
 ```shell
-curl 'http://api.bilibili.com/x/tag/archive/like2'\
---data-urlencode 'aid=89772773'\
---data-urlencode 'tag_id=12620189'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/tag/archive/like2' \
+--data-urlencode 'aid=89772773' \
+--data-urlencode 'tag_id=12620189' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -269,7 +275,7 @@ curl 'http://api.bilibili.com/x/tag/archive/like2'\
 
 | 参数名 | 类型 | 内容                     | 必要性 | 备注 |
 | ------ | ---- | ------------------------ | ------ | ---- |
-| aid    | num  | 视频avID                 | 必要   |      |
+| aid    | num  | 稿件avID                 | 必要   |      |
 | tag_id | num  | TAGID                    | 必要   |      |
 | csrf   | str  | CSRF Token（位于cookie） | 必要   |      |
 
@@ -288,10 +294,10 @@ curl 'http://api.bilibili.com/x/tag/archive/like2'\
 为视频`av89772773`的TAG`7520816`点踩
 
 ```shell
-curl 'http://pi.bilibili.com/x/tag/archive/hate2'\
---data-urlencode 'aid=89772773'\
---data-urlencode 'tag_id=7520816'\
---data-urlencode 'csrf=xxx'\
+curl 'http://pi.bilibili.com/x/tag/archive/hate2' \
+--data-urlencode 'aid=89772773' \
+--data-urlencode 'tag_id=7520816' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 

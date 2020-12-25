@@ -6,6 +6,15 @@ web端密码登录流程：
 2. 加密登录密码，获取RSA公钥`key`与盐值`hash`**（盐值有效时间为20s）**，并连接盐值+密码字串（注意先后顺序），使用RSA公钥加密，得到base64格式密文
 4. 登录操作验证，使用账号`username`**（手机号或邮箱）**+密文密码`password`+登录密钥`key`+极验`challenge`+验证结果`validate`+验证结果`seccode`
 
+---
+
+- [获取加密公钥及密码盐值1（web端）](#获取加密公钥及密码盐值1（web端）)
+- [获取加密公钥及密码盐值2（APP端）](#获取加密公钥及密码盐值2（APP端）)
+- [登录密码的加密](#登录密码的加密)
+- [使用账号密码登录（web端）](#使用账号密码登录（web端）)
+
+---
+
 ## 获取加密公钥及密码盐值1（web端）
 
 > http://passport.bilibili.com/login?act=getkey
@@ -66,8 +75,8 @@ curl 'http://passport.bilibili.com/login?act=getkey'
 **示例：**
 
 ```shell
-curl 'http://passport.bilibili.com/api/oauth2/getKey'\
---data-urlencode 'appkey=1d8b6e7d45233436'\
+curl 'http://passport.bilibili.com/api/oauth2/getKey' \
+--data-urlencode 'appkey=1d8b6e7d45233436' \
 --data-urlencode 'sign=17004c193f688f0b5665c1068e733aff'
 ```
 
@@ -186,14 +195,14 @@ YgpjxAQ22pKa9socHIKPCZX0a/NS6Ng9Zzy+rp16b0LJGT6RHw2ERs3+ijCpG96PKTY1Baavwf0xgotm
 例如用户账号为`12345678900`，加密后的密码为`xxx`，登录秘钥为`aabbccdd`，极验challenge为`2333`，极验结果为`666666`，进行验证登录操作
 
 ```shell
-curl 'https://passport.bilibili.com/web/login/v2'\
---data-urlencode 'captchaType=6'\
---data-urlencode 'username=12345678900'\
---data-urlencode 'password=xxx'\
---data-urlencode 'keep=true'\
---data-urlencode 'key=aabbccdd'\
---data-urlencode 'challenge=2333'\
---data-urlencode 'validate=666666'\
+curl 'https://passport.bilibili.com/web/login/v2' \
+--data-urlencode 'captchaType=6' \
+--data-urlencode 'username=12345678900' \
+--data-urlencode 'password=xxx' \
+--data-urlencode 'keep=true' \
+--data-urlencode 'key=aabbccdd' \
+--data-urlencode 'challenge=2333' \
+--data-urlencode 'validate=666666' \
 --data-urlencode 'seccode=666666|jordan'
 ```
 

@@ -1,5 +1,11 @@
 # 充电留言
 
+- [发送充电留言](#发送充电留言)
+
+---
+
+## 发送充电留言
+
 > http://api.bilibili.com/x/ugcpay/trade/elec/message
 
 *请求方式：POST*
@@ -29,10 +35,10 @@
 为留言token为`BPRG5CEC3VUPOOANA540`的充电操作，添加了内容为`支持一下大佬`的留言
 
 ```shell
-curl 'http://api.bilibili.com/x/ugcpay/trade/elec/message'\
---data-urlencode 'order_id=BPRG5CEC3VUPOOANA540'\
---data-urlencode 'message=支持一下大佬'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/ugcpay/trade/elec/message' \
+--data-urlencode 'order_id=BPRG5CEC3VUPOOANA540' \
+--data-urlencode 'message=支持一下大佬' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 

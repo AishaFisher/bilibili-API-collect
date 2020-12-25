@@ -1,5 +1,11 @@
 # 歌单&音频收藏夹详细信息
 
+- [查询自己创建的歌单](#查询自己创建的歌单)
+
+- [查询音频收藏夹（默认歌单）信息](#查询音频收藏夹（默认歌单）信息)
+
+---
+
 ## 查询自己创建的歌单
 
 > http://www.bilibili.com/audio/music-service-c/web/collections/list
@@ -84,9 +90,9 @@
 **示例：**
 
 ```shell
-curl -G 'http://www.bilibili.com/audio/music-service-c/web/collections/list'\
---data-urlencode 'ps=2'\
---data-urlencode 'pn=1'\
+curl -G 'http://www.bilibili.com/audio/music-service-c/web/collections/list' \
+--data-urlencode 'ps=2' \
+--data-urlencode 'pn=1' \
 -b 'SESSDATA=xxx;DedeUserID=1;'
 ```
 
@@ -235,8 +241,8 @@ curl -G 'http://www.bilibili.com/audio/music-service-c/web/collections/list'\
 查询我的默认歌单，ID为` 15967839 `
 
 ```shell
-curl -G 'http://www.bilibili.com/audio/music-service-c/web/collections/info'\
---data-urlencode 'sid=15967839 '\
+curl -G 'http://www.bilibili.com/audio/music-service-c/web/collections/info' \
+--data-urlencode 'sid=15967839 ' \
 -b 'SESSDATA=xxx;DedeUserID=1;'
 ```
 

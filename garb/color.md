@@ -1,5 +1,10 @@
 # 主题色
 
+- [获取主题色基本信息1](#获取主题色基本信息1)
+- [获取主题色基本信息2](#获取主题色基本信息2)
+
+---
+
 ## 获取主题色基本信息1
 
 > http://club.bilibili.com/api/query.skin.list.do
@@ -55,10 +60,10 @@
 **示例：**
 
 ```shell
-curl -G 'http://club.bilibili.com/api/query.skin.list.do'\
---data-urlencode 'access_key=xxx'\
---data-urlencode 'appkey=1d8b6e7d45233436'\
---data-urlencode 'build=6082000'\
+curl -G 'http://club.bilibili.com/api/query.skin.list.do' \
+--data-urlencode 'access_key=xxx' \
+--data-urlencode 'appkey=1d8b6e7d45233436' \
+--data-urlencode 'build=6082000' \
 --data-urlencode 'sign=2d37f2cd6f86337a6a07cb3cf311be86'
 ```
 
@@ -193,9 +198,9 @@ curl -G 'http://club.bilibili.com/api/query.skin.list.do'\
 **示例：**
 
 ```shell
-curl -G 'http://api.bilibili.com/x/garb/skin/color/list'\
---data-urlencode 'mobi_app=android'\
---data-urlencode 'build=6082000'\
+curl -G 'http://api.bilibili.com/x/garb/skin/color/list' \
+--data-urlencode 'mobi_app=android' \
+--data-urlencode 'build=6082000' \
 -b 'SESSDATA=xxx'
 ```
 

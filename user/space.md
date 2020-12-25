@@ -1,5 +1,52 @@
 # 用户空间相关
 
+- [主页](#主页)
+  - [置顶视频](#置顶视频)
+    - [查询用户置顶视频](#查询用户置顶视频)
+    - [设置置顶视频](#设置置顶视频)
+    - [取消置顶视频](#取消置顶视频)
+  - [代表作视频](#代表作视频)
+    - [查询用户代表作视频列表](#查询用户代表作视频列表)
+    - [添加代表作视频](#添加代表作视频)
+    - [删除代表作视频](#删除代表作视频)
+  - [个人TAG](#个人TAG)
+    - [查看用户个人TAG](#查看用户个人TAG)
+    - [修改个人TAG](#修改个人TAG)
+  - [空间公告](#空间公告)
+    - [查看用户空间公告](#查看用户空间公告)
+    - [修改空间公告](#修改空间公告)
+  - [主页板块布局与权限](#主页板块布局与权限)
+    - [查询空间设置](#查询空间设置)
+    - [调整空间板块布局](#调整空间板块布局)
+    - [修改空间隐私权限](#修改空间隐私权限)
+  - [查询用户最近玩过的游戏](#查询用户最近玩过的游戏)
+  - [获取用户最近投币的视频明细](#获取用户最近投币的视频明细)
+- [投稿](#投稿)
+  - [查询用户投稿视频明细](#查询用户投稿视频明细)
+  - [查询用户投稿相簿预览](#查询用户投稿相簿预览)
+  - [查询用户投稿相簿明细](#查询用户投稿相簿明细)
+- [频道](#频道)
+  - [查询用户频道列表](#查询用户频道列表)
+  - [查询用户频道中的视频](#查询用户频道中的视频)
+  - [创建频道](#创建频道)
+  - [修改频道](#修改频道)
+  - [删除频道](#删除频道)
+  - [频道添加视频](#频道添加视频)
+  - [频道删除视频](#频道删除视频)
+  - [调整频道视频排序](#调整频道视频排序)
+  - [检查频道中有无失效视频](#检查频道中有无失效视频)
+- [收藏](#收藏)
+  - [查询用户创建的视频收藏夹](#查询用户创建的视频收藏夹)
+  - [查询用户收藏的视频收藏夹](#查询用户收藏的视频收藏夹)
+- [课程](#课程)
+  - [查询用户发布的课程列表](#查询用户发布的课程列表)
+- [订阅](#订阅)
+  - [查询用户追番预览列表](#查询用户追番预览列表)
+  - [查询用户追番（追剧）明细](#查询用户追番（追剧）明细)
+  - [查询用户关注的TAG（话题）](#查询用户关注的TAG（话题）)
+
+---
+
 ## 主页
 
 <img src="/imgs/home.svg" width="100" height="100" />
@@ -33,87 +80,37 @@
 
 `data`对象：
 
-| 字段        | 类型 | 内容                           | 备注                    |
-| ----------- | ---- | ------------------------------ | ----------------------- |
-| aid         | num  | 视频avID                       |                         |
-| videos      | num  | 视频分P总数                    | 默认为1                 |
-| tid         | num  | 分区ID                         |                         |
-| tname       | str  | 子分区名称                     |                         |
-| copyright   | num  | 版权标志                       | 1：自制<br />2：转载    |
-| pic         | str  | 视频封面图片url                |                         |
-| title       | str  | 视频标题                       |                         |
-| pubdate     | num  | 视频上传时间                   | 时间戳                  |
-| ctime       | num  | 视频审核通过时间               | 时间戳                  |
-| desc        | str  | 视频简介                       |                         |
-| state       | num  | 0                              | 作用尚不明确            |
-| attribute   | num  |                                | 作用尚不明确            |
-| duration    | num  | 视频总计持续时长（所有分P）    | 单位为秒                |
-| rights      | obj  | 视频属性标志                   |                         |
-| owner       | obj  | 视频UP主信息                   |                         |
-| stat        | obj  | 视频状态数                     |                         |
-| dynamic     | str  | 视频同步发布的的动态的文字内容 | 无为空                  |
-| cid         | num  | 视频1P CID                     |                         |
-| dimension   | obj  | 视频1P分辨率                   |                         |
-| bvid        | str  | 视频bvID                       |                         |
-| reason      | str  | 置顶视频备注                   |                         |
-| inter_video | bool | 是否为合作视频                 | false：否<br />true：是 |
-
-`data`中的`rights`对象：
-
-| 字段            | 类型 | 内容             | 备注                                     |
-| --------------- | ---- | ---------------- | ---------------------------------------- |
-| bp              | num  | 0                | 作用尚不明确                             |
-| elec            | num  | 0                | 作用尚不明确                             |
-| download        | num  | 允许下载标志     | 0：不允许<br />1：允许                   |
-| movie           | num  | 视频时电影标志   | 0：否<br />1：是                         |
-| pay             | num  | 仅会员可观看标志 | 0：无<br />1：有                         |
-| hd5             | num  | 有高码率标志     | 0：无<br />1：有                         |
-| no_reprint      | num  | 禁止转载标志     | 0：无<br />1：禁止                       |
-| autoplay        | num  | 可自动播放标志   | 0：无<br />1：有  区别影视番剧与普通视频 |
-| ugc_pay         | num  | 0                | 作用尚不明确                             |
-| is_cooperation  | num  | 视频合作标志     | 0：无<br />1：是                         |
-| ugc_pay_preview | num  | 0                | 作用尚不明确                             |
-| no_background   | num  | 0                | 作用尚不明确                             |
-
-`data`中的`owner`对象：
-
-| 字段 | 类型 | 内容     | 备注 |
-| ---- | ---- | -------- | ---- |
-| mid  | num  | UP主UID  |      |
-| name | str  | UP主昵称 |      |
-| face | str  | UP主头像 |      |
-
-`data`中的`stat`对象：
-
-| 字段       | 类型 | 内容                           | 备注         |
-| ---------- | ---- | ------------------------------ | ------------ |
-| aid        | num  | 视频avID                       |              |
-| view       | num  | 普通：观看次数<br />屏蔽时：-1 |              |
-| danmaku    | num  | 弹幕条数                       |              |
-| reply      | num  | 评论条数                       |              |
-| favorite   | num  | 收藏人数                       |              |
-| coin       | num  | 投币枚数                       |              |
-| share      | num  | 分享次数                       |              |
-| now_rank   | num  | 0                              | 作用尚不明确 |
-| his_rank   | num  | 历史最高排行                   |              |
-| like       | num  | 获赞次数                       ||
-| dislike    | num  | 0                              | 原为点踩计数，现已不再返回正确数据 |
-| evaluation | str  | 视频评分                       | 默认为空     |
-
-同`data`中的`dimension`对象
-
-| 字段   | 类型 | 内容           | 备注                 |
-| ------ | ---- | -------------- | -------------------- |
-| width  | num  | 当前分P 宽度   | 可能为0              |
-| height | num  | 当前分P 高度   | 可能为0              |
-| rotate | num  | 是否将宽高对换 | 0：正常<br />1：对换 |
+| 字段        | 类型 | 内容                           | 备注                                                         |
+| ----------- | ---- | ------------------------------ | ------------------------------------------------------------ |
+| aid         | num  | 稿件avID                       |                                                              |
+| videos      | num  | 视频分P总数                    | 默认为1                                                      |
+| tid         | num  | 分区tID                        |                                                              |
+| tname       | str  | 子分区名称                     |                                                              |
+| copyright   | num  | 是否转载                       | 1：原创<br />2：转载                                         |
+| pic         | str  | 视频封面图片url                |                                                              |
+| title       | str  | 稿件标题                       |                                                              |
+| pubdate     | num  | 稿件发布时间                   | 时间戳                                                       |
+| ctime       | num  | 用户提交稿件的时间             | 时间戳                                                       |
+| desc        | str  | 视频简介                       |                                                              |
+| state       | num  | 视频状态                       | 略，见[获取视频详细信息（web端）](/video/info.md#获取视频详细信息（web端）)中的`state`备注 |
+| attribute   | num  | 稿件属性位配置                 | 略，见[获取视频详细信息（web端）](/video/info.md#获取视频详细信息（web端）)中的`attribute`备注 |
+| duration    | num  | 视频总计持续时长（所有分P）    | 单位为秒                                                     |
+| rights      | obj  | 视频属性标志                   | 略，见[获取视频详细信息（web端）](/video/info.md#获取视频详细信息（web端）)中的`rights`对象 |
+| owner       | obj  | 视频UP主信息                   | 略，见[获取视频详细信息（web端）](/video/info.md#获取视频详细信息（web端）)中的`owner`对象 |
+| stat        | obj  | 视频状态数                     | 略，见[获取视频详细信息（web端）](/video/info.md#获取视频详细信息（web端）)中的`stat`对象 |
+| dynamic     | str  | 视频同步发布的的动态的文字内容 | 无为空                                                       |
+| cid         | num  | 视频1P CID                     |                                                              |
+| dimension   | obj  | 视频1P分辨率                   | 略，见[获取视频详细信息（web端）](/video/info.md#获取视频详细信息（web端）)中的`dimension`对象 |
+| bvid        | str  | 稿件bvID                       |                                                              |
+| reason      | str  | 置顶视频备注                   |                                                              |
+| inter_video | bool | 是否为合作视频                 | false：否<br />true：是                                      |
 
 **示例：**
 
 查询用户`UID=23215368`的置顶视频
 
 ```shell
-curl -G 'http://api.bilibili.com/x/space/top/arc'\
+curl -G 'http://api.bilibili.com/x/space/top/arc' \
 --data-urlencode 'vmid=23215368'
 ```
 
@@ -199,8 +196,8 @@ curl -G 'http://api.bilibili.com/x/space/top/arc'\
 
 | 参数名 | 类型 | 内容                     | 必要性       | 备注                             |
 | ------ | ---- | ------------------------ | ------------ | -------------------------------- |
-| aid    | num  | 置顶目标视频avID         | 必要（可选） | avID与bvID任选一个               |
-| bvid   | str  | 置顶目标视频bvID         | 必要（可选） | avID与bvID任选一个               |
+| aid    | num  | 置顶目标稿件avID         | 必要（可选） | avID与bvID任选一个               |
+| bvid   | str  | 置顶目标稿件bvID         | 必要（可选） | avID与bvID任选一个               |
 | reason | str  | 置顶视频备注             | 非必要       | 置顶备注最大40字符<br />默认为空 |
 | csrf   | str  | CSRF Token（位于cookie） | 必要         |                                  |
 
@@ -221,16 +218,16 @@ curl -G 'http://api.bilibili.com/x/space/top/arc'\
 avID方式：
 
 ```shell
-curl 'http://api.bilibili.com/x/space/top/arc/set'\
---data-urlencode 'aid=98948772'\
+curl 'http://api.bilibili.com/x/space/top/arc/set' \
+--data-urlencode 'aid=98948772' \
 -b 'SESSDATA=xxx'
 ```
 
 bvID方式：
 
 ```shell
-curl 'http://api.bilibili.com/x/space/top/arc/set'\
---data-urlencode 'bvid=BV1n741127LD'\
+curl 'http://api.bilibili.com/x/space/top/arc/set' \
+--data-urlencode 'bvid=BV1n741127LD' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -274,8 +271,8 @@ curl 'http://api.bilibili.com/x/space/top/arc/set'\
 **示例：**
 
 ```shell
-curl 'http://api.bilibili.com/x/space/top/arc/cancel'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/space/top/arc/cancel' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -331,14 +328,14 @@ curl 'http://api.bilibili.com/x/space/top/arc/cancel'\
 
 `data`数组中的对象：
 
-同查询用户置顶视频中的`data`对象
+同[查询用户置顶视频](#查询用户置顶视频)中的`data`对象
 
 **示例：**
 
 查询用户`UID=23215368`的代表作视频列表
 
 ```shell
-curl -G 'http://api.bilibili.com/x/space/masterpiece'\
+curl -G 'http://api.bilibili.com/x/space/masterpiece' \
 --data-urlencode 'vmid=23215368'
 ```
 
@@ -539,8 +536,8 @@ curl -G 'http://api.bilibili.com/x/space/masterpiece'\
 
 | 参数名 | 类型 | 内容                     | 必要性       | 备注                             |
 | ------ | ---- | ------------------------ | ------------ | -------------------------------- |
-| aid    | num  | 置顶目标视频avID         | 必要（可选） | avID与bvID任选一个               |
-| bvid   | str  | 置顶目标视频bvID         | 必要（可选） | avID与bvID任选一个               |
+| aid    | num  | 置顶目标稿件avID         | 必要（可选） | avID与bvID任选一个               |
+| bvid   | str  | 置顶目标稿件bvID         | 必要（可选） | avID与bvID任选一个               |
 | reason | str  | 代表作备注               | 非必要       | 置顶备注最大40字符<br />默认为空 |
 | csrf   | str  | CSRF Token（位于cookie） | 必要         |                                  |
 
@@ -561,18 +558,18 @@ curl -G 'http://api.bilibili.com/x/space/masterpiece'\
 avID方式：
 
 ```shell
-curl 'http://api.bilibili.com/x/space/masterpiece/add'\
---data-urlencode 'aid=94916552'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/space/masterpiece/add' \
+--data-urlencode 'aid=94916552' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
 bvID方式：
 
 ```shell
-curl 'http://api.bilibili.com/x/space/masterpiece/add'\
---data-urlencode 'bvid=BV1ZE411K7ux'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/space/masterpiece/add' \
+--data-urlencode 'bvid=BV1ZE411K7ux' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -601,8 +598,8 @@ curl 'http://api.bilibili.com/x/space/masterpiece/add'\
 
 | 参数名 | 类型 | 内容                     | 必要性       | 备注               |
 | ------ | ---- | ------------------------ | ------------ | ------------------ |
-| aid    | num  | 要删除的目标视频avID     | 必要（可选） | avID与bvID任选一个 |
-| bvid   | str  | 要删除的目标视频bvID     | 必要（可选） | avID与bvID任选一个 |
+| aid    | num  | 要删除的目标稿件avID     | 必要（可选） | avID与bvID任选一个 |
+| bvid   | str  | 要删除的目标稿件bvID     | 必要（可选） | avID与bvID任选一个 |
 | csrf   | str  | CSRF Token（位于cookie） | 必要         |                    |
 
 **json回复：**
@@ -622,18 +619,18 @@ curl 'http://api.bilibili.com/x/space/masterpiece/add'\
 avID方式：
 
 ```shell
-curl 'api.bilibili.com/x/space/masterpiece/cancel'\
---data-urlencode 'aid=59765630'\
---data-urlencode 'csrf=xxx'\
+curl 'api.bilibili.com/x/space/masterpiece/cancel' \
+--data-urlencode 'aid=59765630' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
 bvID方式：
 
 ```shell
-curl 'http://api.bilibili.com/x/space/masterpiece/cancel'\
---data-urlencode 'bvid=BV1Yt41137T6'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/space/masterpiece/cancel' \
+--data-urlencode 'bvid=BV1Yt41137T6' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -693,7 +690,7 @@ curl 'http://api.bilibili.com/x/space/masterpiece/cancel'\
 查看用户`UID=53456`的个人TAG
 
 ```shell
-curl -G 'http://api.bilibili.com/x/space/acc/tags'\
+curl -G 'http://api.bilibili.com/x/space/acc/tags' \
 --data-urlencode 'mid=53456'
 ```
 
@@ -754,9 +751,9 @@ curl -G 'http://api.bilibili.com/x/space/acc/tags'\
 修改个人TAG为`minecraft,技术宅,大佬,小哥哥,可爱`
 
 ```shell
-curl 'http://api.bilibili.com/x/space/acc/tags/set'\
---data-urlencode 'tags=minecraft,技术宅,大佬,小哥哥,可爱'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/space/acc/tags/set' \
+--data-urlencode 'tags=minecraft,技术宅,大佬,小哥哥,可爱' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx;DedeUserID=1'
 ```
 
@@ -803,7 +800,7 @@ curl 'http://api.bilibili.com/x/space/acc/tags/set'\
 查看用户`UID=53456`的空间公告
 
 ```shell
-curl -G 'http://api.bilibili.com/x/space/notice'\
+curl -G 'http://api.bilibili.com/x/space/notice' \
 --data-urlencode 'mid=53456'
 ```
 
@@ -851,9 +848,9 @@ curl -G 'http://api.bilibili.com/x/space/notice'\
 修改个人空间公告为`鸽子`
 
 ```shell
-curl 'http://api.bilibili.com/x/space/notice/set'\
---data-urlencode 'notice=鸽子'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/space/notice/set' \
+--data-urlencode 'notice=鸽子' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -871,6 +868,192 @@ curl 'http://api.bilibili.com/x/space/notice/set'\
 </details>
 
 ### 主页板块布局与权限
+
+#### 查询空间设置
+
+> http://space.bilibili.com/ajax/settings/getSettings
+
+*请求方式：GET*
+
+注：带有转义
+
+**url参数：**
+
+| 参数名 | 类型 | 内容        | 必要性 | 备注 |
+| ------ | ---- | ----------- | ------ | ---- |
+| mid    | num  | 目标用户UID | 必要   |      |
+
+**json回复：**
+
+根对象：
+
+| 字段   | 类型                | 内容     | 备注 |
+| ------ | ------------------- | -------- | ---- |
+| status | bool             | 用户是否存在                                   | true：存在<br>false：不存在 |
+| data   | 用户存在时：obj<br>用户不存在时：str| 用户存在时：信息本体<br>用户不存在时：错误信息 |      |
+
+`data`对象：
+
+| 字段                   | 类型  | 内容             | 备注         |
+| ---------------------- | ----- | ---------------- | ------------ |
+| privacy                | obj   | 空间隐私权限     |              |
+| index_order            | array | 空间板块布局     |              |
+| theme                  | str   | default主题？    | 作用尚不明确 |
+| theme_preview_img_path | str   | 主题预览图路径？ | 作用尚不明确 |
+| toutu                  | obj   | 空间头图         |              |
+
+`privacy`对象：
+
+| 字段        | 类型 | 内容           | 备注                           |
+| ----------- | ---- | -------------- | ------------------------------ |
+| bangumi     | num  | 追番及追剧     | 0：隐藏<br>1：公开<br>**下同** |
+| bbq         | num  | 轻视频         |                                |
+| channel     | num  | 频道           |                                |
+| coins_video | num  | 最近投币的视频 |                                |
+| comic       | num  | 追漫           |                                |
+| dress_up    | num  | 装扮           |                                |
+| fav_video   | num  | 收藏夹         |                                |
+| groups      | num  | 圈子？         | 作用尚不明确                   |
+| likes_video | num  | 最近点赞的视频 |                                |
+| played_game | num  | 最近玩过的游戏 |                                |
+| tags        | num  | 订阅标签       |                                |
+| user_info   | num  | 个人资料       |                                |
+
+`index_order`数组：
+
+| 项   | 类型 | 内容      | 备注                                         |
+| ---- | ---- | --------- | -------------------------------------------- |
+| 0    | obj  | 板块1     | 根据板块布局顺序排序<br>先左侧布局后右侧布局 |
+| n    | obj  | 板块(n+1) |                                              |
+| ……   | obj  | ……        | ……                                           |
+
+`index_order`数组内对象：
+
+| 字段 | 类型 | 内容     | 备注 |
+| ---- | ---- | -------- | ---- |
+| id   | num  | 板块编号 |      |
+| name | str  | 板块名称 |      |
+
+`toutu`对象：
+
+| 字段          | 类型 | 内容                 | 备注                                               |
+| ------------- | ---- | -------------------- | -------------------------------------------------- |
+| sid           | num  | 空间头图ID           |                                                    |
+| expire        | num  | 到期时间？           | 时间戳？<br />作用尚不明确                         |
+| s_img         | str  | 空间头图小图相对路径 | 完整url为`http://i0.hdslb.com/`+相对路径           |
+| l_img         | str  | 空间头图相对路径     | **同上**                                           |
+| android_img   | str  | 空                   | 注：**手机端头图与web端不同，需要用另一个api获取** |
+| iphone_img    | str  | 空                   |                                                    |
+| ipad_img      | str  | 空                   |                                                    |
+| thumbnail_img | str  | 缩略图               |                                                    |
+| platform      | num  | 0                    | 作用尚不明确                                       |
+
+**示例：**
+
+查看`UID=2`的空间设置
+
+```shell
+curl -G 'http://space.bilibili.com/ajax/settings/getSettings' \
+--data-urlencode 'mid=2'
+```
+
+<details>
+<summary>查看响应示例：</summary>
+
+```json
+{
+    "status":true,
+    "data":{
+        "privacy":{
+            "bangumi":1,
+            "bbq":1,
+            "channel":1,
+            "coins_video":0,
+            "comic":1,
+            "dress_up":1,
+            "fav_video":0,
+            "groups":0,
+            "likes_video":0,
+            "played_game":1,
+            "tags":1,
+            "user_info":1
+        },
+        "index_order":[
+            {
+                "id":1,
+                "name":"我的稿件"
+            },
+            {
+                "id":8,
+                "name":"我的专栏"
+            },
+            {
+                "id":7,
+                "name":"我的频道"
+            },
+            {
+                "id":2,
+                "name":"我的收藏夹"
+            },
+            {
+                "id":3,
+                "name":"订阅番剧"
+            },
+            {
+                "id":4,
+                "name":"订阅标签"
+            },
+            {
+                "id":5,
+                "name":"最近投币的视频"
+            },
+            {
+                "id":6,
+                "name":"我的圈子"
+            },
+            {
+                "id":9,
+                "name":"我的相簿"
+            },
+            {
+                "id":21,
+                "name":"公告"
+            },
+            {
+                "id":22,
+                "name":"直播间"
+            },
+            {
+                "id":23,
+                "name":"个人资料"
+            },
+            {
+                "id":24,
+                "name":"官方活动"
+            },
+            {
+                "id":25,
+                "name":"最近玩过的游戏"
+            }
+        ],
+        "theme":"default",
+        "theme_preview_img_path":"",
+        "toutu":{
+            "sid":1,
+            "expire":2861874560,
+            "s_img":"bfs/space/768cc4fd97618cf589d23c2711a1d1a729f42235.png",
+            "l_img":"bfs/space/cb1c3ef50e22b6096fde67febe863494caefebad.png",
+            "android_img":"",
+            "iphone_img":"",
+            "ipad_img":"",
+            "thumbnail_img":"",
+            "platform":0
+        }
+    }
+}
+```
+
+</details>
 
 #### 调整空间板块布局
 
@@ -891,22 +1074,22 @@ curl 'http://api.bilibili.com/x/space/notice/set'\
 
 布局参数`index_order`：
 
-| 值   | 含义                   |
-| ---- | ---------------------- |
-| 1    | （左侧）我的稿件       |
-| 2    | （左侧）我的收藏夹     |
-| 3    | （左侧）订阅番剧       |
-| 4    | （左侧）订阅标签       |
-| 5    | （左侧）最近投币的视频 |
-| 6    | **作用尚不明确**       |
-| 7    | （左侧）我的频道       |
-| 8    | （左侧）我的专栏       |
-| 9    | （左侧）我的相簿       |
-| 21   | （右侧）公告           |
-| 22   | （右侧）直播间         |
-| 23   | （右侧）个人资料       |
-| 24   | （右侧）官方活动       |
-| 25   | （右侧）最近玩的游戏   |
+| 值   | 含义                                 |
+| ---- | ------------------------------------ |
+| 1    | （左侧）我的稿件                     |
+| 2    | （左侧）我的收藏夹                   |
+| 3    | （左侧）订阅番剧                     |
+| 4    | （左侧）订阅标签                     |
+| 5    | （左侧）最近投币的视频               |
+| 6    | （左侧）我的圈子**（此板块被隐藏）** |
+| 7    | （左侧）我的频道                     |
+| 8    | （左侧）我的专栏                     |
+| 9    | （左侧）我的相簿                     |
+| 21   | （右侧）公告                         |
+| 22   | （右侧）直播间                       |
+| 23   | （右侧）个人资料                     |
+| 24   | （右侧）官方活动                     |
+| 25   | （右侧）最近玩的游戏                 |
 
 **json回复：**
 
@@ -931,10 +1114,10 @@ curl 'http://api.bilibili.com/x/space/notice/set'\
 >我的频道
 
 ```shell
-curl 'http://space.bilibili.com/ajax/settings/setIndexOrder'\
---data-urlencode 'index_order=1,8,3,2,9,5,4,7,22,23,21,24,25,6'\
---data-urlencode 'csrf=xxx'\
--b 'SESSDATA=xxx;DedeUserID=1;DedeUserID__ckMd5=1;'\
+curl 'http://space.bilibili.com/ajax/settings/setIndexOrder' \
+--data-urlencode 'index_order=1,8,3,2,9,5,4,7,22,23,21,24,25,6' \
+--data-urlencode 'csrf=xxx' \
+-b 'SESSDATA=xxx;DedeUserID=1;DedeUserID__ckMd5=1;' \
 -e 'https://www.bilibili.com'
 ```
 
@@ -985,10 +1168,10 @@ curl 'http://space.bilibili.com/ajax/settings/setIndexOrder'\
 设置`关注的TAG`为隐藏
 
 ```shell
-curl 'http://space.bilibili.com/ajax/settings/setPrivacy'\
---data-urlencode 'tags=0'\
---data-urlencode 'csrf=xxx'\
--b 'SESSDATA=xxx;DedeUserID=1;DedeUserID__ckMd5=1;'\
+curl 'http://space.bilibili.com/ajax/settings/setPrivacy' \
+--data-urlencode 'tags=0' \
+--data-urlencode 'csrf=xxx' \
+-b 'SESSDATA=xxx;DedeUserID=1;DedeUserID__ckMd5=1;' \
 -e 'https://www.bilibili.com'
 ```
 
@@ -1047,8 +1230,8 @@ curl 'http://space.bilibili.com/ajax/settings/setPrivacy'\
 查询`UID=2`的最近玩过的游戏
 
 ```shell
-curl -G 'http://api.bilibili.com/x/space/lastplaygame'\
---data-urlencode 'mid=2 '
+curl -G 'http://api.bilibili.com/x/space/lastplaygame' \
+--data-urlencode 'mid=2'
 ```
 
 <details>
@@ -1091,6 +1274,249 @@ curl -G 'http://api.bilibili.com/x/space/lastplaygame'\
 
 </details>
 
+### 获取用户最近投币的视频明细
+
+> http://api.bilibili.com/x/space/coin/video
+
+*请求方式：GET*
+
+认证方式：Cookie（SESSDATA）
+
+如设置隐私查看自己的需要认证
+
+**url参数：**
+
+| 参数名 | 类型 | 内容        | 必要性 | 备注 |
+| ------ | ---- | ----------- | ------ | ---- |
+| vmid   | num  | 目标用户UID | 必要   |      |
+
+**json回复：**
+
+根对象：
+
+| 字段    | 类型                            | 内容     | 备注                                                       |
+| ------- | ------------------------------- | -------- | ---------------------------------------------------------- |
+| code    | num                             | 返回值   | 0：成功<br />-400：请求错误<br />53013：用户隐私设置未公开 |
+| message | str                             | 错误信息 | 默认为0                                                    |
+| ttl     | num                             | 1        |                                                            |
+| data    | 隐藏时：null<br />公开时：array | 信息本体 |                                                            |
+
+`data`数组：
+
+| 项   | 类型 | 内容            | 备注 |
+| ---- | ---- | --------------- | ---- |
+| 0    | obj  | 投币视频1       |      |
+| n    | obj  | 投币视频（n+1） |      |
+| ……   | obj  | ……              |      |
+
+`data`数组中的对象：
+
+基本同[获取视频详细信息（web端）](/video/info.md#获取视频详细信息（web端）)中的data对象
+
+**示例：**
+
+查看用户`UID=15858903`的最近投币视频
+
+```shell
+curl -G 'http://space.bilibili.com/x/space/coin/video' \
+--data-urlencode 'vmid=15858903' \
+-b 'SESSDATA=xxx'
+```
+
+<details>
+<summary>查看响应示例：</summary>
+
+```json
+{
+    "code": 0,
+    "message": "0",
+    "ttl": 1,
+    "data": [
+        {
+            "aid": 669644066,
+            "videos": 1,
+            "tid": 75,
+            "tname": "动物圈",
+            "copyright": 2,
+            "pic": "http://i1.hdslb.com/bfs/archive/0f73a68b8f449cc72e9ef109685bd295dc0c0c9d.jpg",
+            "title": "在人类幼崽身上用尽了温柔",
+            "pubdate": 1600608261,
+            "ctime": 1600608261,
+            "desc": "https://weibo.com/tv/show/1034:4551253766897703?from=old_pc_videoshow",
+            "state": 0,
+            "attribute": 16384,
+            "duration": 29,
+            "rights": {
+                "bp": 0,
+                "elec": 0,
+                "download": 0,
+                "movie": 0,
+                "pay": 0,
+                "hd5": 0,
+                "no_reprint": 0,
+                "autoplay": 1,
+                "ugc_pay": 0,
+                "is_cooperation": 0,
+                "ugc_pay_preview": 0,
+                "no_background": 0
+            },
+            "owner": {
+                "mid": 258457966,
+                "name": "卧龙寺",
+                "face": "http://i2.hdslb.com/bfs/face/f868d1f522733fdcf72a6267e0237157dd0e9948.jpg"
+            },
+            "stat": {
+                "aid": 669644066,
+                "view": 3412898,
+                "danmaku": 719,
+                "reply": 1481,
+                "favorite": 21909,
+                "coin": 2864,
+                "share": 13702,
+                "now_rank": 0,
+                "his_rank": 0,
+                "like": 86970,
+                "dislike": 0
+            },
+            "dynamic": "",
+            "cid": 237319289,
+            "dimension": {
+                "width": 576,
+                "height": 1024,
+                "rotate": 0
+            },
+            "bvid": "BV1sa4y1j7jk",
+            "coins": 1,
+            "time": 1601802763,
+            "ip": "",
+            "inter_video": false
+        },
+        {
+            "aid": 202267998,
+            "videos": 1,
+            "tid": 138,
+            "tname": "搞笑",
+            "copyright": 1,
+            "pic": "http://i0.hdslb.com/bfs/archive/ca7746f2207114513f1a421d7f744523275ee679.jpg",
+            "title": "充  电  器  の  痛",
+            "pubdate": 1601750952,
+            "ctime": 1601750952,
+            "desc": "这个简介吓到我了!",
+            "state": 0,
+            "attribute": 16512,
+            "duration": 50,
+            "mission_id": 14725,
+            "rights": {
+                "bp": 0,
+                "elec": 0,
+                "download": 0,
+                "movie": 0,
+                "pay": 0,
+                "hd5": 0,
+                "no_reprint": 1,
+                "autoplay": 1,
+                "ugc_pay": 0,
+                "is_cooperation": 0,
+                "ugc_pay_preview": 0,
+                "no_background": 0
+            },
+            "owner": {
+                "mid": 129922746,
+                "name": "-白糖洒一地-",
+                "face": "http://i0.hdslb.com/bfs/face/1f581f3b20a380c2fd13ecb8bbe409f8b49c6418.jpg"
+            },
+            "stat": {
+                "aid": 202267998,
+                "view": 109,
+                "danmaku": 2,
+                "reply": 11,
+                "favorite": 5,
+                "coin": 9,
+                "share": 0,
+                "now_rank": 0,
+                "his_rank": 0,
+                "like": 20,
+                "dislike": 0
+            },
+            "dynamic": "",
+            "cid": 241861687,
+            "dimension": {
+                "width": 1920,
+                "height": 1080,
+                "rotate": 0
+            },
+            "bvid": "BV1oh411X7iA",
+            "coins": 2,
+            "time": 1601773750,
+            "ip": "",
+            "inter_video": false
+        },
+        {
+            "aid": 839722373,
+            "videos": 1,
+            "tid": 208,
+            "tname": "校园学习",
+            "copyright": 1,
+            "pic": "http://i2.hdslb.com/bfs/archive/11ed53241ceab314c919adba9f85582d24d9313c.jpg",
+            "title": "“白piáo”用日语到底怎么说？油管人气日语老师来教你！",
+            "pubdate": 1601026026,
+            "ctime": 1601026026,
+            "desc": "志方老师的B站用语日语课又来了~\n欢迎大家来看哦，\n如果喜欢我们的作品的话，欢迎大家用2~3连+转发来支持我们~\n如果拒绝的话，也可以用日语在评论和弹幕里刷上一波~即可以锻炼日语又可以拒绝我们，岂不美哉~~",
+            "state": 0,
+            "attribute": 16768,
+            "duration": 310,
+            "mission_id": 14655,
+            "rights": {
+                "bp": 0,
+                "elec": 0,
+                "download": 0,
+                "movie": 0,
+                "pay": 0,
+                "hd5": 1,
+                "no_reprint": 1,
+                "autoplay": 1,
+                "ugc_pay": 0,
+                "is_cooperation": 0,
+                "ugc_pay_preview": 0,
+                "no_background": 0
+            },
+            "owner": {
+                "mid": 677926489,
+                "name": "日语志方老师",
+                "face": "http://i2.hdslb.com/bfs/face/d465e5cd42e3523a52b3bef38dce7b23627b7723.jpg"
+            },
+            "stat": {
+                "aid": 839722373,
+                "view": 130688,
+                "danmaku": 1320,
+                "reply": 799,
+                "favorite": 3722,
+                "coin": 5883,
+                "share": 339,
+                "now_rank": 0,
+                "his_rank": 0,
+                "like": 17585,
+                "dislike": 0
+            },
+            "dynamic": "志方老师的B站用语日语课又来了~\n欢迎大家来看哦，\n如果喜欢我们的作品的话，欢迎大家用2~3连+转发来支持我们~\n如果拒绝的话，也可以用日语在评论和弹幕里刷上一波~即可以锻炼日语又可以拒绝我们，岂不美哉~~",
+            "cid": 238876133,
+            "dimension": {
+                "width": 1920,
+                "height": 1080,
+                "rotate": 0
+            },
+            "bvid": "BV1n54y117kq",
+            "coins": 2,
+            "time": 1601036198,
+            "ip": "",
+            "inter_video": false
+        }
+    ]
+}
+```
+
+</details>
+
 ## 投稿
 
 <img src="/imgs/video_up.svg" width="100" height="100" />
@@ -1125,10 +1551,11 @@ curl -G 'http://api.bilibili.com/x/space/lastplaygame'\
 
 `data`对象：
 
-| 字段 | 类型 | 内容     | 备注 |
-| ---- | ---- | -------- | ---- |
-| list | obj  | 列表信息 |      |
-| page | obj  | 页面信息 |      |
+| 字段            | 类型 | 内容           | 备注 |
+| --------------- | ---- | -------------- | ---- |
+| list            | obj  | 列表信息       |      |
+| page            | obj  | 页面信息       |      |
+| episodic_button | obj  | “播放全部“按钮 |      |
 
 `data`中的`list`对象：
 
@@ -1192,6 +1619,13 @@ curl -G 'http://api.bilibili.com/x/space/lastplaygame'\
 | pn    | num  | 当前页码   |      |
 | ps    | num  | 每页项数   |      |
 
+`data`中的`episodic_button`对象：
+
+| 字段 | 类型 | 内容          | 备注 |
+| ---- | ---- | ------------- | ---- |
+| text | str  | 按钮文字      |      |
+| uri  | str  | 全部播放页url |      |
+
 **示例：**
 
 `pn`（页码）和`ps`（每页项数）只改变`vlist`中成员的多少与内容
@@ -1199,8 +1633,9 @@ curl -G 'http://api.bilibili.com/x/space/lastplaygame'\
 以每页2项查询用户`UID=53456`的第1页投稿视频明细
 
 ```shell
-curl -G 'http://api.bilibili.com/x/space/arc/search'\
---data-urlencode 'ps=2'\
+curl -G 'http://api.bilibili.com/x/space/arc/search' \
+--data-urlencode 'mid=53456' \
+--data-urlencode 'ps=2' \
 --data-urlencode 'pn=1'
 ```
 
@@ -1209,81 +1644,95 @@ curl -G 'http://api.bilibili.com/x/space/arc/search'\
 
 ```json
 {
-	"code": 0,
-	"message": "0",
-	"ttl": 1,
-	"data": {
-		"list": {
-			"tlist": {
-				"1": {
-					"tid": 1,
-					"count": 17,
-					"name": "动画"
-				},
-				"160": {
-					"tid": 160,
-					"count": 43,
-					"name": "生活"
-				},
-				"3": {
-					"tid": 3,
-					"count": 33,
-					"name": "音乐"
-				},
-				"4": {
-					"tid": 4,
-					"count": 70,
-					"name": "游戏"
-				}
-			},
-			"vlist": [{
-				"comment": 4626,
-				"typeid": 17,
-				"play": 954380,
-				"pic": "//i0.hdslb.com/bfs/archive/b40edb19d3000763e1984f854f8f13d2159e13bc.jpg",
-				"subtitle": "",
-				"description": "游戏：动物森友会 平台：Switch\n封面画师：微博@HRDrifter \n终于盼来了动森的新作，和大家一起守夜等着游戏解锁，终于能在第一时间和大家一起分享这份喜悦~\n但是为什么这份高兴的心情最后会变成越来越多的房债呢……\n我的微博：@_warma_",
-				"copyright": "",
-				"title": "【warma】用水壶往海里浇水海平面会升高吗？《动物森友会》",
-				"review": 0,
-				"author": "Warma",
-				"mid": 53456,
-				"created": 1585311134,
-				"length": "48:16",
-				"video_review": 25064,
-				"aid": 667551016,
-				"bvid": "BV1na4y1t7Bf",
-				"hide_click": false,
-				"is_pay": 0,
-				"is_union_video": 0
-			}, {
-				"comment": 3372,
-				"typeid": 17,
-				"play": 838204,
-				"pic": "//i1.hdslb.com/bfs/archive/fc2bd95021e5c88a16b16a3bef803e0fc141d059.jpg",
-				"subtitle": "",
-				"description": "游戏：Rimworld\n上一期：av96139881\n点赞过8W会更新下一期的~\n录制这一期的时候嗓子炎症加剧了，所以说话有点点闷，不过现在已经好很多了~ 下一期要录的话，我会在嗓子完全康复后再录制的，大家放心~\n我的微博：@_warma_",
-				"copyright": "",
-				"title": "【warma实况】拿起狼牙棒去交朋友！《Rimworld》【第二期】",
-				"review": 0,
-				"author": "Warma",
-				"mid": 53456,
-				"created": 1584758891,
-				"length": "21:40",
-				"video_review": 12964,
-				"aid": 98061972,
-				"bvid": "BV1vE411c7Wu",
-				"hide_click": false,
-				"is_pay": 0,
-				"is_union_video": 0
-			}]
-		},
-		"page": {
-			"count": 163,
-			"pn": 1,
-			"ps": 2
-		}
-	}
+    "code": 0,
+    "message": "0",
+    "ttl": 1,
+    "data": {
+        "list": {
+            "tlist": {
+                "1": {
+                    "tid": 1,
+                    "count": 26,
+                    "name": "动画"
+                },
+                "160": {
+                    "tid": 160,
+                    "count": 42,
+                    "name": "生活"
+                },
+                "211": {
+                    "tid": 211,
+                    "count": 3,
+                    "name": "美食"
+                },
+                "3": {
+                    "tid": 3,
+                    "count": 33,
+                    "name": "音乐"
+                },
+                "4": {
+                    "tid": 4,
+                    "count": 72,
+                    "name": "游戏"
+                }
+            },
+            "vlist": [
+                {
+                    "comment": 3558,
+                    "typeid": 47,
+                    "play": 1275661,
+                    "pic": "//i2.hdslb.com/bfs/archive/90157806a34646ac2d4c6af3e8b6156cb3460d14.jpg",
+                    "subtitle": "",
+                    "description": "第一期：BV1ak4y1B7aG\n第二期：BV1eA411Y7FN\n脚本/绘画/配音/动画/片尾曲：warma\n第三期终于做完啦！这是一个以我平时发呆的时候想到的一些灵感组成的冷笑话合集，名字叫《沃玛的生活》，可以当作日常搞笑单元小动画来看。\n如果你喜欢这个系列的话请点赞投币收藏一键三连给我一些继续制作的动力吧，我真的非常非常需要更多的动力！\n祝看得开心~\n我的微博：@_warma_",
+                    "copyright": "",
+                    "title": "【warma】沃玛的新番更新！从现在开始放飞自我【沃玛的生活/第三期】",
+                    "review": 0,
+                    "author": "Warma",
+                    "mid": 53456,
+                    "created": 1605844817,
+                    "length": "05:16",
+                    "video_review": 7470,
+                    "aid": 585275804,
+                    "bvid": "BV1sz4y1y7KJ",
+                    "hide_click": false,
+                    "is_pay": 0,
+                    "is_union_video": 0,
+                    "is_steins_gate": 0
+                },
+                {
+                    "comment": 2979,
+                    "typeid": 21,
+                    "play": 840676,
+                    "pic": "//i2.hdslb.com/bfs/archive/b43f88c6ebae8fdc7dfb663f6f6f2931b924c763.jpg",
+                    "subtitle": "",
+                    "description": "前一阵子过生日，大家的礼物经过几番转寄终于收到了~于是录了这期礼物开箱视频。\n现在也在感慨，大家的礼物真的都太强了，居然这些全都是手工做的，真的好厉害！\n这些手工礼物背后得花多少时间和心力啊……这些对我来说都是无价的礼物，制作礼物的大家真的有心了，谢谢！！\n收到这些礼物真的很开心，视频的封面也是在这样激动的情况下画出来的，祝你看得开心~\n我的微博：@_warma_",
+                    "copyright": "",
+                    "title": "【warma】来开箱！大家寄来的生日礼物",
+                    "review": 0,
+                    "author": "Warma",
+                    "mid": 53456,
+                    "created": 1604635221,
+                    "length": "24:28",
+                    "video_review": 10476,
+                    "aid": 287744380,
+                    "bvid": "BV1xf4y1q7XN",
+                    "hide_click": false,
+                    "is_pay": 0,
+                    "is_union_video": 0,
+                    "is_steins_gate": 0
+                }
+            ]
+        },
+        "page": {
+            "pn": 1,
+            "ps": 2,
+            "count": 176
+        },
+        "episodic_button": {
+            "text": "播放全部",
+            "uri": "//www.bilibili.com/medialist/play/53456?from=space"
+        }
+    }
 }
 ```
 
@@ -1359,8 +1808,8 @@ curl -G 'http://api.bilibili.com/x/space/arc/search'\
 查询用户`UID=53456`的投稿相簿预览
 
 ```shell
-curl -G 'http://api.bilibili.com/x/space/album/index'\
---data-urlencode 'mid=53456'\
+curl -G 'http://api.bilibili.com/x/space/album/index' \
+--data-urlencode 'mid=53456' \
 --data-urlencode 'ps=2'
 ```
 
@@ -1494,10 +1943,10 @@ curl -G 'http://api.bilibili.com/x/space/album/index'\
 查询用户`UID=53456`的投稿明细中的全部类型
 
 ```shell
-curl -G 'http://api.vc.bilibili.com/link_draw/v1/doc/doc_list'\
---data-urlencode 'uid=2'\
---data-urlencode 'page_num=1'\
---data-urlencode 'page_size=2'\
+curl -G 'http://api.vc.bilibili.com/link_draw/v1/doc/doc_list' \
+--data-urlencode 'uid=2' \
+--data-urlencode 'page_num=1' \
+--data-urlencode 'page_size=2' \
 --data-urlencode 'biz=all'
 ```
 
@@ -1621,7 +2070,7 @@ curl -G 'http://api.vc.bilibili.com/link_draw/v1/doc/doc_list'\
 查询用户`UID=53456`的频道列表
 
 ```shell
-curl -G 'http://api.bilibili.com/x/space/channel/list'\
+curl -G 'http://api.bilibili.com/x/space/channel/list' \
 --data-urlencode 'mid=53456'
 ```
 
@@ -1763,10 +2212,10 @@ curl -G 'http://api.bilibili.com/x/space/channel/list'\
 查询用户`UID=53456`的频道`170`中的视频
 
 ```shell
-curl -G 'http://api.bilibili.com/x/space/channel/video'\
---data-urlencode 'mid=53456'\
---data-urlencode 'cid=170'\
---data-urlencode 'ps=2'\
+curl -G 'http://api.bilibili.com/x/space/channel/video' \
+--data-urlencode 'mid=53456' \
+--data-urlencode 'cid=170' \
+--data-urlencode 'ps=2' \
 --data-urlencode 'pn=1'
 ```
 
@@ -1951,10 +2400,10 @@ curl -G 'http://api.bilibili.com/x/space/channel/video'\
 创建名为`test1`的频道，简介为空
 
 ```shell
-curl 'http://api.bilibili.com/x/space/channel/add'\
---data-urlencode 'name=test1'\
---data-urlencode 'intro='\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/space/channel/add' \
+--data-urlencode 'name=test1' \
+--data-urlencode 'intro=' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -2006,11 +2455,11 @@ curl 'http://api.bilibili.com/x/space/channel/add'\
 修改频道`138996`名称为`测试`，简介为`123456`
 
 ```shell
-curl 'http://api.bilibili.com/x/space/channel/edit'\
---data-urlencode 'cid=138996'\
---data-urlencode 'name=测试'\
---data-urlencode 'intro=123456'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/space/channel/edit' \
+--data-urlencode 'cid=138996' \
+--data-urlencode 'name=测试' \
+--data-urlencode 'intro=123456' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -2057,9 +2506,9 @@ curl 'http://api.bilibili.com/x/space/channel/edit'\
 删除频道`138996`
 
 ```shell
-curl 'http://api.bilibili.com/x/space/channel/del'\
---data-urlencode 'cid=138996'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/space/channel/del' \
+--data-urlencode 'cid=138996' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -2095,7 +2544,7 @@ curl 'http://api.bilibili.com/x/space/channel/del'\
 | 参数名 | 类型 | 内容                     | 必要性 | 备注                   |
 | ------ | ---- | ------------------------ | ------ | ---------------------- |
 | cid    | num  | 频道ID                   | 必要   |                        |
-| aids   | nums | 要添加的目标视频avID     | 必要   | 多个使用","（%2C）分隔 |
+| aids   | nums | 要添加的目标稿件avID     | 必要   | 多个使用","（%2C）分隔 |
 | csrf   | str  | CSRF Token（位于cookie） | 必要   |                        |
 
 **json回复：**
@@ -2107,14 +2556,14 @@ curl 'http://api.bilibili.com/x/space/channel/del'\
 | code    | num   | 返回值           | 0：成功<br />-101：账号未登录<br />-111：csrf校验失败<br />-400：请求错误<br />-404：无此项<br />53003：本频道里的视频已满<br />53006：提交视频已失效或频道里有（非该视频UP主） |
 | message | str   | 错误信息         | 默认为0                                                      |
 | ttl     | num   | 1                |                                                              |
-| data    | array | 出错视频avID列表 |                                                              |
+| data    | array | 出错稿件avID列表 |                                                              |
 
 `data`数组：
 
 | 项   | 类型 | 内容                | 备注 |
 | ---- | ---- | ------------------- | ---- |
-| 0    | num  | 出错视频avID1       |      |
-| n    | num  | 出错视频avID（n+1） |      |
+| 0    | num  | 出错稿件avID1       |      |
+| n    | num  | 出错稿件avID（n+1） |      |
 | ……   | num  | ……                  | ……   |
 
 **示例：**
@@ -2122,10 +2571,10 @@ curl 'http://api.bilibili.com/x/space/channel/del'\
 向频道`138995`中添加视频`av583785685`和`av243322853`
 
 ```shell
-curl 'http://api.bilibili.com/x/space/channel/video/add'\
---data-urlencode 'cid=138995'\
---data-urlencode 'aids=583785685,243322853'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/space/channel/video/add' \
+--data-urlencode 'cid=138995' \
+--data-urlencode 'aids=583785685,243322853' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -2158,7 +2607,7 @@ curl 'http://api.bilibili.com/x/space/channel/video/add'\
 | 参数名 | 类型 | 内容                     | 必要性 | 备注 |
 | ------ | ---- | ------------------------ | ------ | ---- |
 | cid    | num  | 频道ID                   | 必要   |      |
-| aid    | num  | 要删除的目标视频avID     | 必要   |      |
+| aid    | num  | 要删除的目标稿件avID     | 必要   |      |
 | csrf   | str  | CSRF Token（位于cookie） | 必要   |      |
 
 **json回复：**
@@ -2176,10 +2625,10 @@ curl 'http://api.bilibili.com/x/space/channel/video/add'\
 删除频道`138995`中的视频`av583785685`
 
 ```shell
-curl 'http://api.bilibili.com/x/space/channel/video/del'\
---data-urlencode 'cid=138995'\
---data-urlencode 'aid=583785685'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/space/channel/video/del' \
+--data-urlencode 'cid=138995' \
+--data-urlencode 'aid=583785685' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -2209,7 +2658,7 @@ curl 'http://api.bilibili.com/x/space/channel/video/del'\
 | 参数名 | 类型 | 内容                     | 必要性 | 备注                                                         |
 | ------ | ---- | ------------------------ | ------ | ------------------------------------------------------------ |
 | cid    | num  | 频道ID                   | 必要   |                                                              |
-| aid    | num  | 要移动的目标视频avID     | 必要   |                                                              |
+| aid    | num  | 要移动的目标稿件avID     | 必要   |                                                              |
 | to     | num  | 视频排序倒数位置         | 非必要 | 默认为1<br />1为列表底部，视频总数为首端<br />与显示顺序恰好相反 |
 | csrf   | str  | CSRF Token（位于cookie） | 必要   |                                                              |
 
@@ -2228,11 +2677,11 @@ curl 'http://api.bilibili.com/x/space/channel/video/del'\
 调整`138995`中的视频`av583785685`位置为倒数第2
 
 ```shell
-curl 'http://api.bilibili.com/x/space/channel/video/sort'\
---data-urlencode 'cid=138995'\
---data-urlencode 'aid=583785685'\
---data-urlencode 'to=2'\
---data-urlencode 'csrf=xxx'\
+curl 'http://api.bilibili.com/x/space/channel/video/sort' \
+--data-urlencode 'cid=138995' \
+--data-urlencode 'aid=583785685' \
+--data-urlencode 'to=2' \
+--data-urlencode 'csrf=xxx' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -2279,7 +2728,7 @@ curl 'http://api.bilibili.com/x/space/channel/video/sort'\
 
 ```shell
 curl -G 'http://api.bilibili.com/x/space/channel/video/check
---data-urlencode 'cid=138995'\
+--data-urlencode 'cid=138995' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -2344,29 +2793,31 @@ curl -G 'http://api.bilibili.com/x/space/channel/video/check
 
 `data`中的`list`数组中的对象：
 
-| 字段        | 类型 | 内容             | 备注                                      |
-| ----------- | ---- | ---------------- | ----------------------------------------- |
-| id          | num  | 收藏夹mlID       |                                           |
-| fid         | num  | 原始收藏夹ID     | 去除两位UID尾号                           |
-| mid         | num  | 创建用户UID      |                                           |
-| attr        | num  | 收藏夹属性       | 转换成8-bit二进制处理<br />详细说明见下表 |
-| title       | str  | 收藏夹标题       |                                           |
-| fav_state   | num  | 0                | 作用尚不明确                              |
-| media_count | num  | 收藏夹总计视频数 |                                           |
+| 字段        | 类型 | 内容             | 备注            |
+| ----------- | ---- | ---------------- | --------------- |
+| id          | num  | 收藏夹mlID       |                 |
+| fid         | num  | 原始收藏夹ID     | 去除两位UID尾号 |
+| mid         | num  | 创建用户UID      |                 |
+| attr        | num  | 收藏夹属性位配置 |                 |
+| title       | str  | 收藏夹标题       |                 |
+| fav_state   | num  | 0                | 作用尚不明确    |
+| media_count | num  | 收藏夹总计视频数 |                 |
 
-`attr`属性二进制值表：
+`attr`属性位二进制值表：
 
-| 其他有待补充... | 1：默认收藏夹                    | 0：公开性            |
-| --------------- | -------------------------------- | -------------------- |
-|                 | 0：默认收藏夹<br />1：其他收藏夹 | 0：公开<br />1：私有 |
+| 位              | 内容             | 备注                             |
+| --------------- | ---------------- | -------------------------------- |
+| 0               | 是否为默认收藏夹 | 0：默认收藏夹<br />1：其他收藏夹 |
+| 1               | 私有收藏夹       | 0：公开<br />1：私有             |
+| 其他有待补充... |                  |                                  |
 
 **示例：**
 
 查询用户`UID=7792521`的收藏夹列表
 
 ```shell
-curl -G 'http://api.bilibili.com/x/v3/fav/folder/created/list-all'\
---data-urlencode 'up_mid=7792521'\
+curl -G 'http://api.bilibili.com/x/v3/fav/folder/created/list-all' \
+--data-urlencode 'up_mid=7792521' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -2505,10 +2956,10 @@ curl -G 'http://api.bilibili.com/x/v3/fav/folder/created/list-all'\
 查询用户`UID=293793435`的收藏夹收藏列表
 
 ```shell
-curl -G 'http://api.bilibili.com/x/v3/fav/folder/collected/list'\
---data-urlencode 'up_mid=293793435'\
---data-urlencode 'ps=20'\
---data-urlencode 'pn=1'\
+curl -G 'http://api.bilibili.com/x/v3/fav/folder/collected/list' \
+--data-urlencode 'up_mid=293793435' \
+--data-urlencode 'ps=20' \
+--data-urlencode 'pn=1' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -2567,11 +3018,166 @@ curl -G 'http://api.bilibili.com/x/v3/fav/folder/collected/list'\
 
 </details>
 
+## 课程
+
+<img src="/imgs/class.svg" width="100" height="100" />
+
+###  查询用户发布的课程列表
+
+> http://api.bilibili.com/pugv/app/web/season/page
+
+*请求方式：GET*
+
+**url参数：**
+
+| 参数名 | 类型 | 内容        | 必要性 | 备注     |
+| ------ | ---- | ----------- | ------ | -------- |
+| mid    | num  | 目标用户UID | 必要   |          |
+| pn     | num  | 页码        | 非必要 | 默认为1  |
+| ps     | num  | 每页项数    | 非必要 | 默认为20 |
+
+**json回复：**
+
+根对象：
+
+| 字段    | 类型 | 内容     | 备注                                                       |
+| ------- | ---- | -------- | ---------------------------------------------------------- |
+| code    | num  | 返回值   | 0：成功<br />-400：请求错误<br />53013：用户隐私设置未公开 |
+| message | str  | 错误信息 | 默认为0                                                    |
+| ttl     | num  | 1        |                                                            |
+| data    | obj  | 信息本体 |                                                            |
+
+`data`对象：
+
+| 字段 | 类型  | 内容     | 备注 |
+| ---- | ----- | -------- | ---- |
+| list | array | 课程列表 |      |
+| page | obj   | 页面信息 |      |
+
+`data`中的`page`对象：
+
+| 字段  | 类型 | 内容           | 备注                                  |
+| ----- | ---- | -------------- | ------------------------------------- |
+| next  | bool | 是否存在下一页 | false：最后一页<br />true：存在下一页 |
+| num   | num  | 当前页码       |                                       |
+| size  | num  | 每页项数       |                                       |
+| total | num  | 总计项数       |                                       |
+
+`data`中的`list`数组：
+
+| 项   | 类型 | 内容        | 备注                       |
+| ---- | ---- | ----------- | -------------------------- |
+| 0    | obj  | 课程1       |                            |
+| n    | obj  | 课程（n+1） | 按照目标用户的发布顺序排列 |
+| ……   | obj  | ……          |                            |
+
+`data`中的`list`数组中的对象：
+
+| 字段      | 类型 | 内容         | 备注          |
+| --------- | ---- | ------------ | ------------- |
+| cover     | str  | 课程封面url  |               |
+| ep_count  | num  | 课程集数     |               |
+| link      | str  | 课程页面url  | 手机版页面url |
+| page      | num  | 1            | 作用尚不明确  |
+| play      | num  | 课程播放数   |               |
+| season_id | num  | 课程ssID     |               |
+| status    | str  | 更新状态说明 |               |
+| subtitle  | str  | 课程副标题   |               |
+| title     | str  | 课程标题     |               |
+
+**示例：**
+
+查询用户`UID=33683045`的课程发布列表
+
+```shell
+curl -G 'http://api.bilibili.com/pugv/app/web/season/page' \
+--data-urlencode 'mid=33683045' \
+--data-urlencode 'ps=5' \
+--data-urlencode 'pn=1'
+```
+
+<details>
+<summary>查看响应示例：</summary>
+
+```json
+{
+    "code": 0,
+    "data": {
+        "items": [
+            {
+                "cover": "http://i0.hdslb.com/bfs/archive/596575057885fff7f0ceff047437186cba459358.jpg",
+                "ep_count": 10,
+                "link": "https://m.bilibili.com/cheese/play/ss80",
+                "page": 1,
+                "play": 174467,
+                "season_id": 80,
+                "status": "共10期",
+                "subtitle": "百科全书式军事科普短视频系列",
+                "title": "《战忽知道》第一季"
+            },
+            {
+                "cover": "http://i0.hdslb.com/bfs/archive/322aa94d27cece62d2a859caf71ac2426f29eee2.jpg",
+                "ep_count": 1,
+                "link": "https://m.bilibili.com/cheese/play/ss145",
+                "page": 1,
+                "play": 22155,
+                "season_id": 145,
+                "status": "更新至第1期",
+                "subtitle": "此课程为《局座：第四次工业革命来了》部分集数，请谨慎购买",
+                "title": "【体验课】局座讲5G：5G如何改变我们的生活？"
+            },
+            {
+                "cover": "http://i0.hdslb.com/bfs/archive/b9794ac4507f8764e219df413b661b5faf499a19.jpg",
+                "ep_count": 10,
+                "link": "https://m.bilibili.com/cheese/play/ss113",
+                "page": 1,
+                "play": 49833,
+                "season_id": 113,
+                "status": "更新至第10期",
+                "subtitle": "百科全书式军事科普短视频系列",
+                "title": "《战忽知道》第二季"
+            },
+            {
+                "cover": "http://i0.hdslb.com/bfs/archive/7351fcb33592a4bc7aac9f71d421b4b5ce0177d3.jpg",
+                "ep_count": 10,
+                "link": "https://m.bilibili.com/cheese/play/ss51",
+                "page": 1,
+                "play": 4981037,
+                "season_id": 51,
+                "status": "共10期",
+                "subtitle": "洞悉国际局势，学习战略思维",
+                "title": "局座的国际战略课"
+            },
+            {
+                "cover": "http://i0.hdslb.com/bfs/archive/31e2a170b5a815e34f0537a2727b28f1b87dca18.jpg",
+                "ep_count": 10,
+                "link": "https://m.bilibili.com/cheese/play/ss121",
+                "page": 1,
+                "play": 30754,
+                "season_id": 121,
+                "status": "更新至第10期",
+                "subtitle": "百科全书式军事科普短视频系列",
+                "title": "《战忽知道》第三季"
+            }
+        ],
+        "page": {
+            "next": true,
+            "num": 1,
+            "size": 5,
+            "total": 8
+        }
+    },
+    "message": "success"
+}
+```
+
+</details>
+
 ## 订阅
 
 <img src="/imgs/sub.svg" width="100" height="100" />
 
-### 订阅查询用户追番预览列表
+### 查询用户追番预览列表
 
 > http://space.bilibili.com/ajax/Bangumi/getList
 
@@ -2636,8 +3242,8 @@ curl -G 'http://api.bilibili.com/x/v3/fav/folder/collected/list'\
 查看用户`UID=14082`的追番预览列表
 
 ```shell
-curl -G 'http://space.bilibili.com/ajax/Bangumi/getList'\
---data-urlencode 'mid=14082'\
+curl -G 'http://space.bilibili.com/ajax/Bangumi/getList' \
+--data-urlencode 'mid=14082' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -2739,11 +3345,11 @@ curl -G 'http://space.bilibili.com/ajax/Bangumi/getList'\
 查看用户`UID=14082`的追番明细
 
 ```shell
-curl -G 'http://api.bilibili.com/x/space/bangumi/follow/list'\
---data-urlencode 'vmid=14082'\
---data-urlencode 'type=1'\
---data-urlencode 'ps=2'\
---data-urlencode 'pn=1'\
+curl -G 'http://api.bilibili.com/x/space/bangumi/follow/list' \
+--data-urlencode 'vmid=14082' \
+--data-urlencode 'type=1' \
+--data-urlencode 'ps=2' \
+--data-urlencode 'pn=1' \
 -b 'SESSDATA=xxx'
 ```
 
@@ -3008,8 +3614,8 @@ curl -G 'http://api.bilibili.com/x/space/bangumi/follow/list'\
 查询用户`UID=2`的关注TAG
 
 ```shell
-curl -G 'http://space.bilibili.com/ajax/tags/getSubList'\
---data-urlencode 'mid=2'\
+curl -G 'http://space.bilibili.com/ajax/tags/getSubList' \
+--data-urlencode 'mid=2' \
 -b 'SESSDATA=xxx'
 ```
 

@@ -1,5 +1,9 @@
 # APP端开屏图片
 
+- [获取APP端开屏图片列表](#获取APP端开屏图片列表)
+
+---
+
 ## 获取APP端开屏图片列表
 
 > http://app.bilibili.com/x/v2/splash/brand/list
@@ -72,9 +76,9 @@
 **示例：**
 
 ```shell
-curl -G 'http://app.bilibili.com/x/v2/splash/brand/list'\
---data-urlencode 'appkey=1d8b6e7d45233436'\
---data-urlencode 'ts=0'\
+curl -G 'http://app.bilibili.com/x/v2/splash/brand/list' \
+--data-urlencode 'appkey=1d8b6e7d45233436' \
+--data-urlencode 'ts=0' \
 --data-urlencode 'sign=78a89e153cd6231a4a4d55013aa063ce'
 ```
 
